@@ -10,15 +10,17 @@ public class Main {
 
     public static void main(String[] args) {
 
+        loadFromFile();
 
         int choice;
 
         do {
 
-            System.out.println("===== NOTE MANAGER =====");
+            System.out.println("\n===== NOTE MANAGER =====");
             System.out.println("1 Add Note");
-            System.out.println("2 View Note");
-            System.out.println("3 Exit");
+            System.out.println("2 View Notes");
+            System.out.println("3 Delete Note");
+            System.out.println("4 Exit");
 
             choice = input.nextInt();
             input.nextLine();
@@ -28,12 +30,19 @@ public class Main {
                 case 1:
                     addNote();
                     break;
+
                 case 2:
                     viewNotes();
                     break;
+
                 case 3:
-                    System.out.println("Thank You For Using Note Manager");
-                    System.exit(0);
+                    deleteNote();
+                    break;
+
+                case 4:
+                    saveToFile();
+                    System.out.println("Saved");
+                    break;
             }
 
         } while (choice != 4);
@@ -64,6 +73,58 @@ public class Main {
     }
 
 
+    static void deleteNote() {
 
+        viewNotes();
 
+        System.out.print("Enter index: ");
+        int i = input.nextInt();
+
+        if (i >= 0 && i < notes.size()) {
+
+            notes.remove(i);
+            System.out.println("Deleted");
+        }
     }
+
+
+    static void saveToFile() {
+
+        try {
+
+            PrintWriter pw = new PrintWriter(FILE);
+
+            for (Note n : notes) {
+                pw.println(n.text);
+            }
+
+            pw.close();
+
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+    }
+
+
+    static void loadFromFile() {
+
+        try {
+
+            File f = new File(FILE);
+
+            if (!f.exists()) return;
+
+            Scanner sc = new Scanner(f);
+
+            while (sc.hasNextLine()) {
+
+                notes.add(new Note(sc.nextLine()));
+            }
+
+            sc.close();
+
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+    }
+}
