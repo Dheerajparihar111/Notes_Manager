@@ -19,8 +19,9 @@ public class Main {
             System.out.println("\n===== NOTE MANAGER =====");
             System.out.println("1 Add Note");
             System.out.println("2 View Notes");
-            System.out.println("3 Delete Note");
-            System.out.println("4 Exit");
+            System.out.println("3 Search Note");
+            System.out.println("4 Delete Note");
+            System.out.println("5 Exit");
 
             choice = input.nextInt();
             input.nextLine();
@@ -36,16 +37,20 @@ public class Main {
                     break;
 
                 case 3:
-                    deleteNote();
+                    searchNote();
                     break;
 
                 case 4:
+                    deleteNote();
+                    break;
+
+                case 5:
                     saveToFile();
                     System.out.println("Saved");
                     break;
             }
 
-        } while (choice != 4);
+        } while (choice != 5);
     }
 
 
@@ -67,8 +72,32 @@ public class Main {
 
         for (int i = 0; i < notes.size(); i++) {
 
-            System.out.print(i + " : ");
+            System.out.print((i + 1) + " : ");   // start from 1
             notes.get(i).display();
+        }
+    }
+
+
+    static void searchNote() {
+
+        System.out.print("Enter keyword: ");
+        String key = input.nextLine();
+
+        boolean found = false;
+
+        for (int i = 0; i < notes.size(); i++) {
+
+            if (notes.get(i).text.contains(key)) {
+
+                System.out.print((i + 1) + " : ");
+                notes.get(i).display();
+
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Not found");
         }
     }
 
@@ -77,12 +106,14 @@ public class Main {
 
         viewNotes();
 
-        System.out.print("Enter index: ");
-        int i = input.nextInt();
+        System.out.print("Enter note number: ");
+        int n = input.nextInt();
 
-        if (i >= 0 && i < notes.size()) {
+        int index = n - 1;   // convert to index
 
-            notes.remove(i);
+        if (index >= 0 && index < notes.size()) {
+
+            notes.remove(index);
             System.out.println("Deleted");
         }
     }
