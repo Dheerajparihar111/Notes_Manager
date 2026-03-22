@@ -16,13 +16,15 @@ public class Main {
 
         do {
 
-            System.out.println("\n===== NOTE MANAGER =====");
-            System.out.println("1 Add Note");
-            System.out.println("2 View Notes");
-            System.out.println("3 Search Note");
-            System.out.println("4 Edit Note");
-            System.out.println("5 Delete Note");
-            System.out.println("6 Exit");
+            System.out.println("===== NOTE MANAGER =====");
+            System.out.println("| 1) Add Note           |");
+            System.out.println("| 2) View Notes         |");
+            System.out.println("| 3) Search Note        |");
+            System.out.println("| 4) Edit Note          |");
+            System.out.println("| 5) Delete Note        |");
+            System.out.println("| 6) Exit               |");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.print("Enter Your Choice :");
 
             choice = input.nextInt();
             input.nextLine();
