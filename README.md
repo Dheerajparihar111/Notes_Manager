@@ -90,37 +90,9 @@ java Main
 
 ## 💻 Example Output
 
-```
-===== NOTE MANAGER =====
+<img width="1918" height="1016" alt="Notes Manager output 1" src="https://github.com/user-attachments/assets/5a702e1f-18d1-431a-98d1-256a6e41b1bc" />
+<img width="1918" height="1015" alt="Notes Manager output 2" src="https://github.com/user-attachments/assets/53304c26-2e33-44db-b7d3-cc9711b89a65" />
 
-1 Add Note
-2 View Notes
-3 Search Note
-4 Delete Note
-5 Exit
-
-Enter choice: 1
-
-Enter note:
-Buy groceries
-```
-
-```
-===== NOTE MANAGER =====
-
-Enter choice: 2
-
-1 : Buy groceries
-```
-
-```
-===== NOTE MANAGER =====
-
-Enter choice: 3
-
-Enter keyword: Buy
-
-1 : Buy groceries
 ```
 Link : https://github.com/Dheerajparihar111/Notes_Manager
 ---
