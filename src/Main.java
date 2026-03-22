@@ -20,8 +20,9 @@ public class Main {
             System.out.println("1 Add Note");
             System.out.println("2 View Notes");
             System.out.println("3 Search Note");
-            System.out.println("4 Delete Note");
-            System.out.println("5 Exit");
+            System.out.println("4 Edit Note");
+            System.out.println("5 Delete Note");
+            System.out.println("6 Exit");
 
             choice = input.nextInt();
             input.nextLine();
@@ -41,16 +42,20 @@ public class Main {
                     break;
 
                 case 4:
-                    deleteNote();
+                    editNote();
                     break;
 
                 case 5:
+                    deleteNote();
+                    break;
+
+                case 6:
                     saveToFile();
                     System.out.println("Saved");
                     break;
             }
 
-        } while (choice != 5);
+        } while (choice != 6);
     }
 
 
@@ -72,8 +77,7 @@ public class Main {
 
         for (int i = 0; i < notes.size(); i++) {
 
-            System.out.print((i + 1) + " : ");   // start from 1
-            notes.get(i).display();
+            System.out.println((i + 1) + " : " + notes.get(i).text);
         }
     }
 
@@ -89,9 +93,7 @@ public class Main {
 
             if (notes.get(i).text.contains(key)) {
 
-                System.out.print((i + 1) + " : ");
-                notes.get(i).display();
-
+                System.out.println((i + 1) + " : " + notes.get(i).text);
                 found = true;
             }
         }
@@ -102,14 +104,51 @@ public class Main {
     }
 
 
+    static void editNote() {
+
+        if (notes.isEmpty()) {
+            System.out.println("No notes");
+            return;
+        }
+
+        viewNotes();
+
+        System.out.print("Enter note number: ");
+        int n = input.nextInt();
+        input.nextLine();
+
+        int index = n - 1;
+
+        if (index >= 0 && index < notes.size()) {
+
+            System.out.println("Old text: " + notes.get(index).text);
+
+            System.out.print("Enter new text: ");
+            String t = input.nextLine();
+
+            notes.get(index).text = t;
+
+            System.out.println("Updated");
+        }
+        else {
+            System.out.println("Invalid index");
+        }
+    }
+
+
     static void deleteNote() {
+
+        if (notes.isEmpty()) {
+            System.out.println("No notes");
+            return;
+        }
 
         viewNotes();
 
         System.out.print("Enter note number: ");
         int n = input.nextInt();
 
-        int index = n - 1;   // convert to index
+        int index = n - 1;
 
         if (index >= 0 && index < notes.size()) {
 
@@ -117,8 +156,6 @@ public class Main {
             System.out.println("Deleted");
         }
     }
-
-
     static void saveToFile() {
 
         try {
@@ -132,30 +169,39 @@ public class Main {
             pw.close();
 
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Error saving");
         }
     }
 
 
     static void loadFromFile() {
 
+        notes.clear();
+
         try {
 
             File f = new File(FILE);
 
-            if (!f.exists()) return;
+            if (!f.exists()) {
+                f.createNewFile();   // create empty file
+                return;
+            }
 
             Scanner sc = new Scanner(f);
 
             while (sc.hasNextLine()) {
 
-                notes.add(new Note(sc.nextLine()));
+                String line = sc.nextLine().trim();
+
+                if (!line.isEmpty()) {
+                    notes.add(new Note(line));
+                }
             }
 
             sc.close();
 
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Error loading");
         }
     }
 }
