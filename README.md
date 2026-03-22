@@ -122,7 +122,7 @@ Enter keyword: Buy
 
 1 : Buy groceries
 ```
-
+Link : https://github.com/Dheerajparihar111/Notes_Manager
 ---
 
 ## 🎯 Learning Concepts
@@ -136,17 +136,6 @@ Enter keyword: Buy
 
 ---
 
-## 🔥 Future Improvements
-
-* Edit note option
-* Date & time for notes
-* Priority notes
-* Multiple users
-* Password login
-* GUI version (Swing / JavaFX)
-* Database storage
-
----
 
 ## 👨‍💻 Author
 
